@@ -1,0 +1,95 @@
+{
+    "name": "soltsice",
+    "private": false,
+    "version": "0.2.4",
+    "description": "Solidity & TypeScript Integration, Configuration and Examples",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Soltsice/Soltsice.git"
+    },
+    "keywords": [
+        "Solidity",
+        "Ethereum",
+        "TypeScript",
+        "web3",
+        "dapp"
+    ],
+    "author": "dataspreads.io",
+    "authors": [
+        {
+            "name": "Victor Baybekov",
+            "email": "vb@dataspreads.io",
+            "url": "https://github.com/buybackoff"
+        }
+    ],
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/Soltsice/Soltsice/issues"
+    },
+    "homepage": "https://github.com/dbrainio/Soltsice#readme",
+    "devDependencies": {
+        "@types/ganache-core": "^2.1.2",
+        "@types/jest": "^24.0.11",
+        "@types/node": "^11.12.2",
+        "@types/utf8": "^2.1.6",
+        "copyfiles": "^2.1.0",
+        "ganache-cli": "^6.3.0",
+        "jest": "^24.5.0",
+        "ts-jest": "^24.0.1",
+        "tslint": "^5.14.0",
+        "tslint-react": "^4.0.0",
+        "typescript": "^3.4.1"
+    },
+    "dependencies": {
+        "@types/command-line-args": "^5.0.0",
+        "bignumber.js": "^4.0.0",
+        "command-line-args": "^5.1.0",
+        "ethereumjs-tx": "^1.3.7",
+        "ethereumjs-util": "^6.1.0",
+        "keythereum": "^1.0.4",
+        "openzeppelin-solidity": "^2.2.0",
+        "solc": "^0.5.7",
+        "truffle-contract": "^3.0.0",
+        "utf8": "^3.0.0",
+        "web3": "^0.20.4"
+    },
+    "peerDependencies": {
+        "bignumber.js": "^4.0.0"
+    },
+    "scripts": {
+        "test": "jest --watch",
+        "build:contracts": "truffle compile",
+        "soltsice": "tsc && copyfiles -u 2 build/contracts/**/* src/artifacts && copyfiles -u 2 build/contracts/**/* dist/artifacts && npm run soltsice:gen && tsc",
+        "soltsice:gen": "copyfiles -u 2 build/contracts/**/* src/artifacts && node ./dist/soltsice.bin.js ./src/artifacts ./src/contracts ..",
+        "_prepublishOnly": "npm run soltsice && jest",
+        "travis": "npm run build:contracts && npm run soltsice && jest",
+        "docs": "typedoc --excludePrivate --excludeProtected --excludeExternals --hideGenerator --exclude \"**/*+(test|.bin|index|DummyContract).ts\" --theme ./misc/theme --name Soltsice --mode file --out ./docs ./src",
+        "clear_jest": "jest --clearCache",
+        "test_ci": "jest"
+      },
+    "bin": {
+        "soltsice": "dist/soltsice.bin.js"
+    },
+    "jest": {
+        "testEnvironment": "node",
+        "transform": {
+            "^.+\\.tsx?$": "ts-jest"
+        },
+        "testMatch": [
+            "<rootDir>/src/**/__tests__/**/*.ts?(x)",
+            "<rootDir>/src/**/*(*.)(spec|test).ts?(x)",
+            "<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}",
+            "<rootDir>/src/**/*(*.)(spec|test).{js,jsx,ts,tsx}"
+        ],
+        "moduleFileExtensions": [
+            "ts",
+            "tsx",
+            "js",
+            "jsx",
+            "json",
+            "node"
+        ]
+    }
+}

@@ -1,0 +1,16 @@
+/node_modules
+/build
+/dist
+/tmp
+/package-lock.json
+/src/artifacts
+
+/nbproject
+/.idea
+/.vscode
+
+*~
+*.swp
+*.swap
+
+.DS_Store
